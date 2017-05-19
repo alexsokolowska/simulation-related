@@ -1,0 +1,20 @@
+Questions -- contact the author (Alex Sokolowska).
+version 19.05.2017
+===================
+apex: X-ray luminosity calculator. Uses APEC output models.
+
+"APEC output models in AtomDB are for optically-thin plasmas in collisional ionization equilibrium. APEC outputs separate continuum and line emissivity files, making it easy to model continuum and line emission separately as well as together." http://www.atomdb.org
+
+Calculation of the X-ray luminosity of your gasoline file.
+Requires packages: astropy, pynbody, numpy, pickle, gc
+Tested for atomdb_v3.0.2 (download here: http://www.atomdb.org/download.php).
+
+Goal: compute total X-ray luminosity in the 0.5-2keV band within a virial radius of a halo, as a sum of the contribution from lines and a continuum.
+
+How to run it:
+
+1) Fill in the input_parameters.py according to the example.
+2) run apex_gasoline.py (will produce intermediate files)
+3) run apex.py (the X-ray luminosity will be printed to the command line).
+
+That's all!
