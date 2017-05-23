@@ -26,20 +26,19 @@ def open_files(name):
 	#arrays of quantities for gas particles within (0,240)kpc around a main galaxy
 
     filenames = ["Vol.p","H.p","He.p", "Temp.p","Ox.p","Fe.p","ne.p","ni.p"]
-
-	vol = pickle.load(open(pathto+name+'Vol.p', 'rb'))
-	ne = pickle.load(open(pathto+name+'ne.p', 'rb'))
-	ni = pickle.load(open(pathto+name+'ni.p', 'rb'))
-	temp = pickle.load(open(pathto+name+'Temp.p', 'rb'))
-	Fe = pickle.load(open(pathto+name+'Fe.p', 'rb'))/0.01267
-	Ox = pickle.load(open(pathto+name+'Ox.p', 'rb'))/0.009618
-	H = pickle.load(open(pathto+name+'H.p', 'rb'))
-	He = pickle.load(open(pathto+name+'He.p', 'rb'))
-
+    buff = {}
     for ii in range(8):
-        close(pathto+name+filenames[ii])
+        with open(pathto+name+filenames[ii], 'rb') as f:
+            if ii==4:
+                buff[ii] = pickle.load(f)/0.01267
 
-	return	run(vol, ni, ne, temp, Fe, Ox, H, He)
+            elif ii==5:
+                buff[ii] = pickle.load(f)/0.009618
+
+            else:
+	        buff[ii] = pickle.load(f)
+
+    return run(buff[0],buff[1], buff[2], buff[3], buff[4], buff[5], buff[6], buff[7])
 
 def lines(sim, line):
 	""" pass class sim file and line fits file, returns epsilon"""
