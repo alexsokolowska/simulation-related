@@ -12,27 +12,27 @@ eVkB = 11604.505 #1eV/kB = 11604.505 K
 erg2keV = 6.242e8 
 
 class run:
-	def __init__(self, vol, ni, ne, temp, Fe, Ox, H, He):
-		self.vol = vol
-		self.ni = ni
-		self.ne = ne
-		self.temp = temp
-		self.Fe = Fe
-		self.Ox = Ox
-		self.H = H
-		self.He = He
+    def __init__(self, vol, ni, ne, temp, Fe, Ox, H, He):
+        self.vol = vol
+        self.ni = ni
+	self.ne = ne
+	self.temp = temp
+	self.Fe = Fe
+	self.Ox = Ox
+	self.H = H
+	self.He = He
 
 def open_files(name):
 	#arrays of quantities for gas particles within (0,240)kpc around a main galaxy
 
-    filenames = ["Vol.p","H.p","He.p", "Temp.p","Ox.p","Fe.p","ne.p","ni.p"]
+    filenames = ["Vol.p","ni.p", 'ne.p', "Temp.p","Fe.p", "Ox.p","H.p","He.p"]
     buff = {}
     for ii in range(8):
         with open(pathto+name+filenames[ii], 'rb') as f:
-            if ii==4:
+            if ii==4: #Fe
                 buff[ii] = pickle.load(f)/0.01267
 
-            elif ii==5:
+            elif ii==5: #Ox
                 buff[ii] = pickle.load(f)/0.009618
 
             else:
